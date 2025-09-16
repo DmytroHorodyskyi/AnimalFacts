@@ -9,6 +9,7 @@ import SwiftUI
 
 struct FactCardView: View {
     
+    //MARK: Body
     var body: some View {
         ZStack {
             RoundedRectangle(cornerRadius: 6)
@@ -44,6 +45,7 @@ struct FactCardView: View {
     }
 }
 
+//MARK: - Preview
 #Preview {
     FactCardView()
 }

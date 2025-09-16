@@ -9,6 +9,7 @@ import SwiftUI
 
 struct FactsView: View {
     
+    //MARK: Body
     var body: some View {
         GeometryReader { geometry in
             VStack(spacing: 0) {
@@ -42,6 +43,7 @@ struct FactsView: View {
     }
 }
 
+//MARK: - Preview
 #Preview {
     FactsView()
 }

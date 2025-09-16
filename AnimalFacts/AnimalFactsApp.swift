@@ -6,12 +6,18 @@
 //
 
 import SwiftUI
+import ComposableArchitecture
 
 @main
 struct AnimalFactsApp: App {
+    
+    //MARK: Body
     var body: some Scene {
         WindowGroup {
-            CategoriesListView()
+            CategoriesListView(store: Store(
+                initialState: CategoriesListStore.State(),
+                reducer: { CategoriesListStore() }
+            ))
         }
     }
 }

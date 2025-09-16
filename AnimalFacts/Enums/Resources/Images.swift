@@ -6,6 +6,7 @@
 //
 
 import SwiftUICore
+import UIKit
 
 enum Images: String {
     
@@ -13,8 +14,13 @@ enum Images: String {
     case arrowRightInCircle
     case comingSoonMark
     case lock
+    case paw
     
     var image: Image {
         Image(rawValue)
+    }
+    
+    var uiImage: UIImage {
+        UIImage(named: rawValue)!
     }
 }

@@ -6,24 +6,65 @@
 //
 
 import SwiftUI
+import ComposableArchitecture
 
 struct CategoriesListView: View {
+    
+    //MARK: Properties
+    @Perception.Bindable var store: StoreOf<CategoriesListStore>
+    
+    //MARK: Body
     var body: some View {
-        NavigationView {
-            VStack {
-                ScrollView {
-                    NavigationLink(destination: FactsView()) {
-                        CategoryView()
+        WithPerceptionTracking {
+            NavigationView {
+                ZStack {
+                    Colors.purpleBackground.color.ignoresSafeArea()
+                    ScrollView {
+                        VStack(spacing: 20) {
+                            ForEach(store.categories, id: \.order) { category in
+                                NavigationLink(destination: FactsView()) {
+                                    CategoryView(store: Store(
+                                        initialState: CategoryStore.State(category: category),
+                                        reducer: { CategoryStore() }
+                                    ))
+                                }
+                            }
+                        }
+                        .padding(.vertical)
+                    }
+                    .refreshable {
+                        store.send(.loadCategories)
+                    }
+                    if store.isLoading {
+                        ProgressView()
+                            .progressViewStyle(.circular)
+                            .scaleEffect(2)
                     }
                 }
             }
-            .padding()
-            .background(Colors.purpleBackground.color)
+            .tint(Colors.black.color)
+            .alert(isPresented: Binding(
+                get: { store.error != nil },
+                set: { _ in store.send(.eraseError) }
+            )) {
+                Alert(
+                    title: Text("Error"),
+                    message: Text(store.error ?? ""),
+                    dismissButton: .default(Text("Ok"))
+                )
+                
+            }
+            .onAppear {
+                store.send(.loadCategories)
+            }
         }
-        .tint(Colors.black.color)
     }
 }
 
+//MARK: - Preview
 #Preview {
-    CategoriesListView()
+    CategoriesListView(store: Store(
+        initialState: CategoriesListStore.State(),
+        reducer: { CategoriesListStore() }
+    ))
 }
