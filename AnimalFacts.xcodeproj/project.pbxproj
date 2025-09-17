@@ -8,7 +8,23 @@
 
 /* Begin PBXBuildFile section */
 		74ADD6212E795DD100FF59EF /* ComposableArchitecture in Frameworks */ = {isa = PBXBuildFile; productRef = 74ADD6202E795DD100FF59EF /* ComposableArchitecture */; };
+		74C0C5E12E7AA3B100DA60D5 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 74C0C5E02E7AA3B100DA60D5 /* RealmSwift */; };
+		74C0C5E52E7AB28800DA60D5 /* RealmSwift in Embed Frameworks */ = {isa = PBXBuildFile; productRef = 74C0C5E02E7AA3B100DA60D5 /* RealmSwift */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 /* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		74C0C5E62E7AB28800DA60D5 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				74C0C5E52E7AB28800DA60D5 /* RealmSwift in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		7482C9122E791854005F6D25 /* AnimalFacts.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AnimalFacts.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -27,6 +43,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				74C0C5E12E7AA3B100DA60D5 /* RealmSwift in Frameworks */,
 				74ADD6212E795DD100FF59EF /* ComposableArchitecture in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -60,6 +77,7 @@
 				7482C90E2E791854005F6D25 /* Sources */,
 				7482C90F2E791854005F6D25 /* Frameworks */,
 				7482C9102E791854005F6D25 /* Resources */,
+				74C0C5E62E7AB28800DA60D5 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -71,6 +89,7 @@
 			name = AnimalFacts;
 			packageProductDependencies = (
 				74ADD6202E795DD100FF59EF /* ComposableArchitecture */,
+				74C0C5E02E7AA3B100DA60D5 /* RealmSwift */,
 			);
 			productName = AnimalFacts;
 			productReference = 7482C9122E791854005F6D25 /* AnimalFacts.app */;
@@ -102,6 +121,7 @@
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
 				74ADD61F2E795DD100FF59EF /* XCRemoteSwiftPackageReference "swift-composable-architecture" */,
+				74C0C5DD2E7AA3B100DA60D5 /* XCRemoteSwiftPackageReference "realm-swift" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 7482C9132E791854005F6D25 /* Products */;
@@ -268,8 +288,7 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				IPHONEOS_DEPLOYMENT_TARGET = 16;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -297,8 +316,7 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				IPHONEOS_DEPLOYMENT_TARGET = 16;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -345,6 +363,14 @@
 				minimumVersion = 1.22.2;
 			};
 		};
+		74C0C5DD2E7AA3B100DA60D5 /* XCRemoteSwiftPackageReference "realm-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/realm/realm-swift";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -352,6 +378,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 74ADD61F2E795DD100FF59EF /* XCRemoteSwiftPackageReference "swift-composable-architecture" */;
 			productName = ComposableArchitecture;
+		};
+		74C0C5E02E7AA3B100DA60D5 /* RealmSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 74C0C5DD2E7AA3B100DA60D5 /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = RealmSwift;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

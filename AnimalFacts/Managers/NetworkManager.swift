@@ -17,18 +17,18 @@ final class NetworkManager: INetworkManager {
     //MARK: Properties
     private let baseURL = "https://raw.githubusercontent.com/AppSci/promova-test-task-iOS/main"
     private let session: URLSession
-    private let decoder: JSONDecoder
     private let loggerManager: ILoggerManager
+    private let decoderManager: IDecoderManager
     
     //MARK: Initialization
     init(
         session: URLSession = URLSession.shared,
-        decoder: JSONDecoder = JSONDecoder(),
-        loggerManager: ILoggerManager
+        loggerManager: ILoggerManager,
+        decoderManager: IDecoderManager
     ) {
         self.session = session
-        self.decoder = decoder
         self.loggerManager = loggerManager
+        self.decoderManager = decoderManager
     }
 }
 
@@ -51,7 +51,7 @@ extension NetworkManager {
             }
             
             do {
-                let value = try decoder.decode(
+                let value = try decoderManager.decode(
                     T.self,
                     from: data
                 )
@@ -78,6 +78,10 @@ extension NetworkManager: DependencyKey {
     
     static let liveValue: INetworkManager = {
         let loggerManager = DependencyValues._current.loggerManager
-        return NetworkManager(loggerManager: loggerManager)
+        let decoderManager = DependencyValues._current.decoderManager
+        return NetworkManager(
+            loggerManager: loggerManager,
+            decoderManager: decoderManager
+        )
     }()
 }

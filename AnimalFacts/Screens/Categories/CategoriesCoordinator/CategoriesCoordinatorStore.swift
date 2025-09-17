@@ -77,11 +77,10 @@ struct CategoriesCoordinatorStore {
                 return .send(.navigateToFacts(category))
                 
             case .navigateToFacts(let category):
-                guard let contents = category.content else { return .none }
                 state.navigationStack.append(Path.State.facts(
                     FactsStore.State(
                         title: category.title,
-                        contents: contents
+                        contents: Array(category.content)
                     )
                 ))
                 return .none
