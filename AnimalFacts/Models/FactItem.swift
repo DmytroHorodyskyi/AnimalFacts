@@ -6,15 +6,28 @@
 //
 
 import Foundation
+import RealmSwift
 
-struct FactItem: Identifiable, Decodable {
+final class FactItem: Object, Identifiable, Decodable {
     
     //MARK: Properties
-    var id: UUID = UUID()
-    let fact: String
-    let image: String
+    @Persisted(primaryKey: true) var id: UUID = UUID()
+    @Persisted var fact: String
+    @Persisted var image: String
     
+    convenience init(
+        fact: String,
+        image: String
+    ) {
+        self.init()
+        self.fact = fact
+        self.image = image
+    }
+}
+
     //MARK: CodingKeys
+extension FactItem {
+    
     private enum CodingKeys: String, CodingKey {
         case fact
         case image

@@ -10,7 +10,7 @@ import ComposableArchitecture
 
 struct CategoryView: View {
     
-    let store: StoreOf<CategoryStore>    
+    let store: StoreOf<CategoryStore>
     
     //MARK: Body
     var body: some View {
@@ -75,7 +75,7 @@ private extension CategoryView {
     }
     
     var categoryDescription: some View {
-        Text(store.category.description)
+        Text(store.category.descriptionText)
             .font(Fonts.regular14.font)
             .foregroundStyle(Colors.black.color.opacity(0.5))
             .frame(maxWidth: .infinity, alignment: .leading)
@@ -104,7 +104,7 @@ private extension CategoryView {
         store: Store(
             initialState: CategoryStore.State(category: FactCategory(
                 title: "Title",
-                description: "Subscription",
+                descriptionText: "Subscription",
                 image: "some image url",
                 order: 0,
                 status: "paid",
