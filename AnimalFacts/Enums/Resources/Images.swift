@@ -15,6 +15,10 @@ enum Images: String {
     case comingSoonMark
     case lock
     case paw
+}
+
+//MARK: - Methods
+extension Images {
     
     var image: Image {
         Image(rawValue)

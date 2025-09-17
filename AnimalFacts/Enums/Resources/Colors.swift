@@ -13,6 +13,10 @@ enum Colors: String {
     case black
     case purpleBackground
     case white
+}
+
+//MARK: - Methods
+extension Colors {
     
     var color: Color {
         Color(rawValue)

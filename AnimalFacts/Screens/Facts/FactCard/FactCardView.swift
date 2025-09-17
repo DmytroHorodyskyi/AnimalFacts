@@ -6,46 +6,84 @@
 //
 
 import SwiftUI
+import ComposableArchitecture
 
 struct FactCardView: View {
     
+    let store: StoreOf<FactCardStore>
+    
     //MARK: Body
     var body: some View {
-        ZStack {
-            RoundedRectangle(cornerRadius: 6)
-                .foregroundStyle(Colors.white.color)
-            VStack(spacing: 15) {
-                Image(systemName: "cross")
-                    .resizable()
-                    .frame(width: 315, height: 234)
-                Text("Fact Text ")
-                    .font(Fonts.regular18.font)
-                    .multilineTextAlignment(.center)
-                    .fixedSize(horizontal: false, vertical: true)
-                Spacer()
-                HStack {
-                    Button(action: {
-                        
-                    }, label: {
-                        Images.arrowLeftInCircle.image
-                    })
+        WithPerceptionTracking {
+            ZStack {
+                cardBackground
+                VStack(spacing: 0) {
+                    factImage
+                    factText
                     Spacer()
-                    Button(action: {
-                        
-                    }, label: {
-                        Images.arrowRightInCircle.image
-                    })
+                    navigationButtons
                 }
-                .padding(8)
+                .padding()
             }
-            .padding()
+            .padding(15)
+            .aspectRatio(0.77, contentMode: .fit)
         }
-        .padding(15)
-        .aspectRatio(0.77, contentMode: .fit)
+    }
+}
+
+//MARK: - Subviews
+private extension FactCardView {
+    
+    var cardBackground: some View {
+        RoundedRectangle(cornerRadius: 6)
+            .foregroundStyle(Colors.white.color)
+    }
+    
+    var factImage: some View {
+        AsyncImageView(
+            url: URL(string: store.content.image),
+            defaultImage: Images.paw.uiImage
+        )
+        .frame(width: 315, height: 234)
+        .clipped()
+        .padding(.bottom)
+    }
+    
+    var factText: some View {
+        Text(store.content.fact)
+            .font(Fonts.regular18.font)
+            .foregroundStyle(Colors.black.color)
+            .multilineTextAlignment(.center)
+            .fixedSize(horizontal: false, vertical: true)
+    }
+    
+    var navigationButtons: some View {
+        HStack {
+            Button(action: {
+                store.send(.previousTapped)
+            }, label: {
+                Images.arrowLeftInCircle.image
+            })
+            Spacer()
+            Button(action: {
+                store.send(.nextTapped)
+            }, label: {
+                Images.arrowRightInCircle.image
+            })
+        }
+        .padding(8)
     }
 }
 
 //MARK: - Preview
 #Preview {
-    FactCardView()
+    FactCardView(store: Store(
+        initialState: FactCardStore.State(
+            contentIndex: 0,
+            content: FactItem(
+                fact: "Unlike humans, cats do not need to blink their eyes on a regular basis to keep their eyes lubricated.",
+                image: "https://cdn2.thecatapi.com/images/1lf.jpg"
+            )),
+        reducer: { FactCardStore() }
+    ))
 }

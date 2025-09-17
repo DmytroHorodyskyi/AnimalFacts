@@ -12,6 +12,10 @@ enum Fonts {
     case regular14
     case regular16
     case regular18
+}
+
+//MARK: - Methods
+extension Fonts {
     
     var font: Font {
         switch self {

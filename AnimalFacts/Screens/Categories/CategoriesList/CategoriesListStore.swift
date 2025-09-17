@@ -15,49 +15,45 @@ struct CategoriesListStore {
     @ObservableState
     struct State {
         var categories: [FactCategory] = []
-        var isLoading: Bool = false
-        var error: String?
+        var isLoading = false
     }
-    
+
     //MARK: Action
     enum Action {
+        
         case loadCategories
         case successLoadCategories([FactCategory])
-        case failed(Error)
-        case eraseError
+        case failed(String)
+        case didTapCategory(FactCategory)
     }
-    
+
     @Dependency(\.networkManager) var networkManager
-    
+
     //MARK: Body
     var body: some ReducerOf<Self> {
         Reduce { state, action in
             switch action {
-                
             case .loadCategories:
                 state.isLoading = true
                 return .run { send in
                     do {
                         let result: [FactCategory] = try await networkManager.get(.animals)
                         await send(.successLoadCategories(result))
-                    }
-                    catch {
-                        await send(.failed(error))
+                    } catch {
+                        await send(.failed(error.localizedDescription))
                     }
                 }
-                
+
             case .successLoadCategories(let categories):
                 state.isLoading = false
                 state.categories = categories.sorted { $0.order < $1.order }
                 return .none
-                
-            case .failed(let error):
+
+            case .failed:
                 state.isLoading = false
-                state.error = error.localizedDescription
                 return .none
-                
-            case .eraseError:
-                state.error = nil
+
+            case .didTapCategory:
                 return .none
             }
         }

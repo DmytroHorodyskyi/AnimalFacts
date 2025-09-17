@@ -14,9 +14,9 @@ struct AnimalFactsApp: App {
     //MARK: Body
     var body: some Scene {
         WindowGroup {
-            CategoriesListView(store: Store(
-                initialState: CategoriesListStore.State(),
-                reducer: { CategoriesListStore() }
+            CategoriesCoordinatorView(store: Store(
+                initialState: CategoriesCoordinatorStore.State(),
+                reducer: { CategoriesCoordinatorStore() }
             ))
         }
     }
